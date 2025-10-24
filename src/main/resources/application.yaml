@@ -14,7 +14,7 @@ gateway:
   url: http://localhost:8080  # 网关地址
   service-name: ${spring.application.name}
   port: ${server.port}
-  ip: 127.0.0.1  # 强制使用localhost
+#  ip: 127.0.0.1  # 强制使用localhost
   health-path: /actuator/health
   description: "gRPC服务"
   version: "1.0.0"

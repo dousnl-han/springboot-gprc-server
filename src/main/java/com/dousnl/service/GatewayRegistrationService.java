@@ -89,7 +89,7 @@ public class GatewayRegistrationService {
         data.put("protocol", "http");
         data.put("status", "UP");
         data.put("projectName", gatewayConfig.getServiceName());
-        data.put("endpoint", "http://localhost:"+gatewayConfig.getPort());
+        data.put("endpoint", "http://"+gatewayConfig.getIp()+":"+gatewayConfig.getPort());
         return data;
     }
     
@@ -99,7 +99,11 @@ public class GatewayRegistrationService {
     private String getLocalIpAddress() {
         try {
             // 优先使用localhost，避免网络IP问题
-            return "127.0.0.1";
+            //获取ip地址
+            InetAddress address = InetAddress.getLocalHost();
+            String hostAddress = address.getHostAddress();
+            System.out.println("hostAddress:"+hostAddress);
+            return hostAddress;
         } catch (Exception e) {
             logger.warn("获取本机IP地址失败，使用默认值", e);
             return "127.0.0.1";
@@ -113,11 +117,13 @@ public class GatewayRegistrationService {
         try {
             logger.info("开始从网关注销服务...");
             
-            String unregisterUrl = gatewayConfig.getUrl() + "/api/gateway/unregister";
+            String unregisterUrl = gatewayConfig.getUrl() + "/gateway/unregister";
             Map<String, Object> data = new HashMap<>();
             data.put("serviceName", gatewayConfig.getServiceName());
             data.put("ip", gatewayConfig.getIp());
             data.put("port", gatewayConfig.getPort());
+            data.put("projectName", gatewayConfig.getServiceName());
+            data.put("endpoint", "http://"+gatewayConfig.getIp()+":"+gatewayConfig.getPort());
             
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
