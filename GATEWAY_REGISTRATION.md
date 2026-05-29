@@ -120,3 +120,11 @@ management:
 3. 如果网关不可用，服务仍会正常启动，但会在日志中记录错误
 4. 可以通过修改 `application.yaml` 中的 `gateway.url` 来配置网关地址
 
+
+
+
+
+
+
+
+
