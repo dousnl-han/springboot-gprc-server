@@ -17,7 +17,7 @@ public class TestController {
     @GetMapping("/hello")
     public Map<String, Object> hello() {
         Map<String, Object> response = new HashMap<>();
-        response.put("message", "Hello from Spring Boot gRPC Server!");
+        response.put("message", "你好---Hello from Spring Boot gRPC Server!");
         response.put("timestamp", LocalDateTime.now().toString());
         response.put("service", "springboot-grpc-server");
         response.put("path", "/user-orch/hello");
